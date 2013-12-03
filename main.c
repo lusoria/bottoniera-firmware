@@ -21,9 +21,6 @@
 
 #include "usbcfg.h"
 
-/* Virtual serial port over USB.*/
-SerialUSBDriver SDU1;
-
 /*
  * Red LED blinker thread, times are in milliseconds.
  */
@@ -63,18 +60,18 @@ int main(void) {
 	/*
 	 * Initializes a serial-over-USB CDC driver.
 	 */
-	sduObjectInit(&SDU1);
-	sduStart(&SDU1, &serusbcfg);
+//	sduObjectInit(&SDU1);
+//	sduStart(&SDU1, &serusbcfg);
 
 	/*
 	 * Activates the USB driver and then the USB bus pull-up on D+.
 	 * Note, a delay is inserted in order to not have to disconnect the cable
 	 * after a reset.
 	 */
-	usbDisconnectBus(serusbcfg.usbp);
+	usbDisconnectBus(hidcfg.usbp);
 	chThdSleepMilliseconds(1000);
-	usbStart(serusbcfg.usbp, &usbcfg);
-	usbConnectBus(serusbcfg.usbp);
+	usbStart(hidcfg.usbp, &usbcfg);
+	usbConnectBus(hidcfg.usbp);
 
 	/*
 	 * Activates the serial driver 2 using the driver default configuration.
@@ -90,7 +87,7 @@ int main(void) {
 	 * sleeping in a loop and check the button state.
 	 */
 	while (TRUE) {
-		chprintf((BaseSequentialStream *) &SDU1, "diocane\r\n");
+//		chprintf((BaseSequentialStream *) &SDU1, "diocane\r\n");
 		chThdSleepMilliseconds(500);
 	}
 }

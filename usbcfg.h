@@ -17,8 +17,20 @@
 #ifndef _USBCFG_H_
 #define _USBCFG_H_
 
+
+typedef struct {
+  /**
+   * @brief   USB driver to use.
+   */
+  USBDriver                 *usbp;
+  /**
+   * @brief   Interrupt IN endpoint used for notifications.
+   */
+  usbep_t                   int_in;
+} HIDUSBConfig;
+
 extern const USBConfig usbcfg;
-extern SerialUSBConfig serusbcfg;
+extern const HIDUSBConfig hidcfg;
 
 #endif  /* _USBCFG_H_ */
 
