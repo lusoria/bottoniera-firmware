@@ -18,6 +18,8 @@
 #include "hal.h"
 #include "usbcfg.h"
 
+#define USB_DESCRIPTOR_RPIPE		34
+
 /*
  * Endpoints to be used for USBD1.
  */
@@ -257,8 +259,14 @@ static const USBDescriptor *get_descriptor(USBDriver *usbp,
       return &hid_strings[dindex];
     else
       break;
+  case 0x21:
+	  while(1);
+	break;
   case 0x22:
+	  while(1);
 	  return &hid_report_descriptor;
+  default:
+	  while(1);
   }
   return NULL;
 }
